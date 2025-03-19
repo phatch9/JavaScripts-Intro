@@ -1,0 +1,20 @@
+Part 1) Functional programming in JavaScript
+Download functional.js from the course website.
+Implement the foldr, foldl, and map functions.
+
+Part 2) Object-oriented programming in JavaScript.
+Create a 'Student' constructor, like we did for Cat in class.
+It should have the following fields:
+*firstName
+*lastName
+*studentID
+*display -- A function that prints out the firstName, lastName, and studentID number.
+      To invoke it, you should call `student.display()`.
+
+Create an array of new students.
+Add a 'graduated' property to just one of your students.
+
+Now create another student **without** using the constructor.
+(In other words, use the object literal `{}` syntax).
+Set the prototype chain manually using the __proto__ field.
+Make sure the display method still works (without you having to add it to the object explicitly).

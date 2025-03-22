@@ -17,3 +17,5 @@ function Rabbit(name) {
 var r = new Rabbit("Python");
 
 console.log(r.name); // Prints "Python"
+
+/* Output: Python */

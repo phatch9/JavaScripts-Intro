@@ -1,4 +1,4 @@
-var rabbitName = "Monty";
+var rabbitName = "Monty"; //avoid conflict
 var Rabbit = /** @class */ (function () {
     function Rabbit(name) {
         this.name = name;

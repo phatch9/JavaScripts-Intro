@@ -1,4 +1,4 @@
-let rabbitName = "Monty"
+let rabbitName = "Monty" //avoid conflict
 
 class Rabbit {
     name: string;
@@ -6,8 +6,7 @@ class Rabbit {
         this.name = name;
     }
 }
-
     const r = new Rabbit("Python"); //create instance
 
-   console.log(r.name); // prints "Python"
-   console.log(rabbitName);   // prints "Monty"
+    console.log(r.name);       // prints "Python"
+    console.log(rabbitName);   // prints "Monty"

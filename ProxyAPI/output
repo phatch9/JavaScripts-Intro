@@ -1,0 +1,16 @@
+/* run smart-array.js */
+/* output */
+
+a
+e
+Exception correctly thrown.
+[ 'c', 'd', 'e' ]
+[ 'd', 'e', 'f' ]
+f
+d
+Exception correctly thrown.
+B
+E
+Exception correctly thrown.
+Exception correctly thrown.
+[ 'a', 'B', 'c', 'd', 'E', 'f' ]

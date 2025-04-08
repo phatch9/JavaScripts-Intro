@@ -22,3 +22,4 @@ java -cp .:out:${ANTLR_LIB} org.antlr.v4.gui.TestRig Expr prog -gui $1
 # Run the calculator
 java -classpath .:out/:${ANTLR_LIB} Calc $1
 
+

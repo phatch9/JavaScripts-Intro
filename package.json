@@ -1,0 +1,22 @@
+{
+  "name": "javascripts-intro",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phatch9/JavaScripts-Intro.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phatch9/JavaScripts-Intro/issues"
+  },
+  "homepage": "https://github.com/phatch9/JavaScripts-Intro#readme",
+  "description": ""
+}

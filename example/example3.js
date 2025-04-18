@@ -52,20 +52,18 @@ function Account(name, balance) {
     a.withdraw(100);
     a.withdraw(100);
     console.log(a.balance);
-  
+
     a.withdraw(100);
     a.deposit(90);
     a.withdraw(100);
     a.withdraw(100);
     console.log(a.balance);
-  
+
     // Next statement should be a contract violation.
     a.withdraw(100);
     console.log(a.balance);
-  } catch (e) {
+    } catch (e) {
     console.log(e.message);
-  }
-  
-  console.log(a.balance);
-  
-  
+    }
+
+    console.log(a.balance);

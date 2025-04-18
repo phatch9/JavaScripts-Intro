@@ -5,45 +5,43 @@ class Shrink
     def initialize()
       @he = "he"
       @she = "she"
-      @they = "they"  # New memory for "they"
+      @they = "they"  
     end
   
-    # Generate a psychiatric response
+    # read a statement and convert it to a psychiatric response
     def generateResponse(blather)
       original = blather.dup
       blather = blather.downcase.strip
-  
-      # Filter out "Well", "Perhaps", etc.
+
+      # Filter out "Well", "Perhaps"
       blather.sub!(/^(well|perhaps|maybe|also)\b[\s,]*/i, '')
   
       # Respond to "Are you" type questions
       if blather =~ /\A(are you\b.*)\?*/
         return "IS IT IMPORTANT IF I AM #{original.strip.upcase}?"
       end
-  
-      # Respond to vague terms
+      # Respond to terms
       if blather =~ /\b(always|never|every time|constantly)\b/
         return "CAN YOU BE MORE SPECIFIC?"
       end
   
-      # Human-like touch: respond to "I'm feeling [emotion]"
+      # respond to "I'm feeling [emotion]"
       if blather =~ /\bi'?m feeling (\w+)\b/
         return "WHY DO YOU THINK YOU FEEL #{$1.upcase}?"
       end
-  
-      # Pronoun swapping
+      # Pronoun changing 
       blather.gsub!(/\byour\b/, "MY")
       blather.gsub!(/\byou\b/, 'I')
       blather.gsub!(/\bmy\b/, "your")
       blather.gsub!(/\bme\b/, "you")
       blather.gsub!(/\bi\b/, 'you')
   
-      # Past reference substitution
+      # Sub in past references
       blather.sub!(/\b(he|him)\b/, @he)
       blather.sub!(/\b(she|her)\b/, @she)
       blather.sub!(/\b(they|them)\b/, @they)
   
-      # Update memory references
+      # Get future references -- note that these do NOT change the immediate output
       hePat = /.*\b(your (father|brother|(ex-?)?(husband|boyfriend)))\b.*/
       shePat = /.*\b(your (mother|sister|(ex-?)?(wife|girlfriend)))\b.*/
       theyPat = /.*\b(your (friends|parents|siblings|teachers|coworkers|they))\b.*/
@@ -52,7 +50,7 @@ class Shrink
       @she = blather.sub(shePat, '\1').chomp if blather =~ shePat
       @they = blather.sub(theyPat, '\1').chomp if blather =~ theyPat
   
-      # Handle name
+      # Deal with name
       namePat = /.*\byour name is (\w+).*/
       @name = blather.sub(namePat, '\1')
       blather.sub!(namePat, 'nice to meet you, \1. how can I help you')
@@ -85,5 +83,4 @@ class Shrink
         response = eliza.generateResponse line
         puts response
     end
-  end
-  
+end

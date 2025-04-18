@@ -90,26 +90,32 @@ function any(v) {
     
     function contract(preList, post, f) {
         return new Proxy(f, {
-            apply: function(target, thisArg, argumentsList) {
+          apply(target, thisArg, args) {
+            // Validate preconditions
             for (let i = 0; i < preList.length; i++) {
-                const contractFn = preList[i];
-                const arg = argumentsList[i];
-                if (!contractFn(arg)) {
-                    throw new Error(
-                        `Contract violation: expected argument ${i + 1} to be ${expect(contractFn)}, but got ${JSON.stringify(arg)}. Blame -> caller`
-                    );
-                    }
+              const condition = preList[i];
+              const arg = args[i];
+              const valid = condition.call(thisArg, arg);
+              if (!valid) {
+                const expected = condition.expected || 'unknown';
+                const blame = 'Top-level code';
+                throw new Error(`Contract violation in position ${i}. Expected ${expected} but received ${arg}. Blame -> ${blame}`);
                 }
-            const result = target.apply(thisArg, argumentsList);
-                if (!post(result)) {
-                throw new Error(
-                    `Contract violation: expected return value to be ${expect(post)}, but got ${JSON.stringify(result)}. Blame -> library`
-                );
-                }
-                return result;
             }
+            // Call the function with proper 'this'
+            const result = target.apply(thisArg, args);
+      
+            // Validate postcondition (if any)
+            if (post && !post.call(thisArg, result)) {
+              const expected = post.expected || 'unknown';
+              const blame = target.name || 'library';
+              throw new Error(`Contract violation. Expected ${expected} but returned ${JSON.stringify(result)}. Blame -> ${blame}`);
+            }
+      
+            return result;
+          }
         });
-    }
+      }
     
     module.exports = {
         contract: contract,

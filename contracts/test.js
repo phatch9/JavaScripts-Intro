@@ -2,7 +2,8 @@ var assert = require('assert');
 
 // Perhaps remove this when it is part of a module
 
-    var {
+var {
+    contract: contract,
     isNumber: isNumber,
     isBoolean: isBoolean,
     isDefined: isDefined,
@@ -171,4 +172,67 @@ var assert = require('assert');
         assert.equal(or(isDefined, isString).expected, "defined or string");
         assert.equal(or(isNumber, isPositive, isDefined).expected, "number or positive number or defined");
     });
+    });
+// Part 2 Unit testing
+// Proxy function tests ---
+
+describe('contract()', function () {
+    it('should allow valid inputs and return the correct result', function () {
+      function add(a, b) {
+        return a + b;
+      }
+  
+    let wrappedAdd = contract(
+        [isNumber, isNumber],
+        isNumber,
+        add
+      );
+  
+      assert.equal(wrappedAdd(2, 3), 5);
+      assert.equal(wrappedAdd(-10, 10), 0);
+    });
+  
+    it('should throw error if input does not match precondition', function () {
+      function multiply(a, b) {
+        return a * b;
+      }
+  
+      let wrappedMultiply = contract(
+        [isNumber, isNumber],
+        isNumber,
+        multiply
+      );
+  
+      assert.throws(() => wrappedMultiply("hello", 3), /Contract violation in position 0. Expected number but received hello/);
+      assert.throws(() => wrappedMultiply(2, undefined), /Contract violation in position 1. Expected number but received undefined/);
+    });
+
+    it('should throw error if output does not match postcondition', function () {
+        function badFunction(a, b) {
+        return "oops";
+    }
+
+    let wrappedBad = contract(
+        [isNumber, isNumber],
+        isNumber,
+        badFunction
+      );
+  
+      assert.throws(() => wrappedBad(3, 4), /Contract violation\. Expected number but returned "oops"/);
+    });
+  
+    it('should allow contracts with composed preconditions', function () {
+      function subtract(a, b) {
+        return a - b;
+      }
+  
+      let wrappedSubtract = contract(
+        [and(isNumber, isDefined), and(isNumber, isDefined)],
+        isNumber,
+        subtract
+      );
+  
+        assert.equal(wrappedSubtract(10, 3), 7);
+        assert.throws(() => wrappedSubtract(10, null), /Contract violation in position 1. Expected number and defined but received null/);
+        });
     });

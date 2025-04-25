@@ -62,11 +62,29 @@ end
 def to_bytecode
     bytecode = []
     case @op
-    when 'println'
+when 'println'
     comp_arg(@args[0], bytecode)
     bytecode.push(PRINT_OP)
     #
     # YOUR CODE HERE -- Add 'when' cases to support the other expressions.
+when '+'
+    comp_arg(@args[0], bytecode)
+    (1...@args.size).each do |i|
+        comp_arg(@args[i], bytecode)
+        bytecode.push(ADD_OP)
+    end
+when '-'
+    comp_arg(@args[0], bytecode)
+    (1...@args.size).each do |i|
+        comp_arg(@args[i], bytecode)
+        bytecode.push(SUB_OP)
+    end
+when '*'
+    comp_arg(@args[0], bytecode)
+    (1...@args.size).each do |i|
+        comp_arg(@args[i], bytecode)
+        bytecode.push(MUL_OP)
+    end
     else
     raise "Unrecognized op '#{@op}'"
     end
@@ -163,7 +181,6 @@ def compile(scheme_file, bytecode_file)
     end
 end
 end
-
 
 if ARGV.length < 2
 puts "Usage: ruby compiler.rb <scheme file> <bytecode file>"

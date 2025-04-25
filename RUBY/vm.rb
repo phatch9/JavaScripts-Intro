@@ -22,7 +22,19 @@ File.open(bytecode_file, 'r') do |file|
     #
     # YOUR CODE HERE -- Add extra 'when' cases to handle
     # additional operations.
-    #
+when ADD_OP
+    b = @stack.pop
+    a = @stack.pop
+    @stack.push(a + b)
+when SUB_OP
+    b = @stack.pop
+    a = @stack.pop
+    @stack.push(a - b)
+when MUL_OP
+    b = @stack.pop
+    a = @stack.pop
+    @stack.push(a * b)
+
     else
         raise "Unrecognized command: '#{ln}'"
     end

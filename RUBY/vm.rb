@@ -35,11 +35,11 @@ when MUL_OP
     a = @stack.pop
     @stack.push(a * b)
 
-    else
-        raise "Unrecognized command: '#{ln}'"
+        else
+            raise "Unrecognized command: '#{ln}'"
+            end
+        end
     end
-    end
-end
 end
 end
 

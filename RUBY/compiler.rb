@@ -58,6 +58,7 @@ when '-'
     raise "Unrecognized op '#{@op}'"
     end
 end
+
 # recursively compiles the AST to bytecode, used for the compiler
 def to_bytecode
     bytecode = []

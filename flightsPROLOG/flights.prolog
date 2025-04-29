@@ -1,4 +1,3 @@
-
 %Airports
 airport(aus, "Austin-Bergstrom International").
 airport(ewr, "Newark Liberty International").
@@ -57,8 +56,8 @@ flight(ewr, sfo, 16:11, 19:40, 313.40).
 % ArrivalTime: Time arriving at the final destination.
 % Flights: List of the airports to visit, in order.
 % TotalCost: Cost of all flights.
-route(Departing, Arriving, Visited, DepartureTime, ArrivalTime, Flights, TotalCost) :-
-    fail.
+% route(Departing, Arriving, Visited, DepartureTime, ArrivalTime, Flights, TotalCost) :-
+% fail.
 
 % Helper: compare times
 earlier(H1:M1, H2:M2) :-
@@ -67,14 +66,14 @@ earlier(H1:M1, H2:M2) :-
 
 % Main route rule
 route(Departing, Arriving, Visited, DepartureTime, ArrivalTime, [Departing, Arriving], Price) :-
-    % direct flight
+% direct flight
     flight(Departing, Arriving, DepartureTime, ArrivalTime, Price),
     \+ member(Departing, Visited),
     \+ member(Arriving, Visited).
 
 route(Departing, Arriving, Visited, DepartureTime, FinalArrivalTime, [Departing | RestOfFlights], TotalCost) :-
 % take a flight to a midpoint
-    flight(Departing, Midpoint, DepartureTime, MidArrivalTime, Price1),
+flight(Departing, Midpoint, DepartureTime, MidArrivalTime, Price1),
     Midpoint \= Arriving,            % not directly to final destination yet
     \+ member(Midpoint, Visited),    % to avoid cycles
     route(Midpoint, Arriving, [Departing | Visited], NextDepartureTime, FinalArrivalTime, RestOfFlights, Price2),

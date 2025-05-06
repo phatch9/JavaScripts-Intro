@@ -1,0 +1,23 @@
+a programming language used for writing Ethereum smart contracts.
+
+
+PART 1
+
+Before we begin with Solidity, we will get to know Ethereum through the browser add-on MetaMask.
+
+Install MetaMask in your browser (FireFox or Chrome) from metamask.io.
+
+Once installed, click on the fox icon to load MetaMask, and then click "Get Started"
+
+Click "Create a Wallet". Say yes to the terms & conditions, and then create a password. Write it down -- don't save it on your computer. Write down and verify your mnemonic phrase.
+
+ 
+
+PART 2
+For part 2, we're going to write a distributed lottery. Starter code is available on the course website.
+
+In this lottery, there can be exactly 3 players. Each player should contribute ether and pick a random number. Once the last player has contributed, the winner's address is selected. The owner of that address gains ownership of the account and can destroy it to claim the winnings.
+
+Go to http://remix.ethereum.org and click on 'Solidity'. Open a new file and name it 'Lottery.sol'.
+
+Follow the steps we discussed in class to compile and deploy the code. Experiment with the code to be sure that it works.

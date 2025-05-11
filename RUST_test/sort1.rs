@@ -1,19 +1,24 @@
-use std::fmt::Display;
-
 // Function types must be declared
-fn print_arr<T: Display>(a: &[T]) -> () {
+fn print_arr(a: &[i32]) -> () {
   for i in a {
     print!("{} ", i);
   }
   println!("");
 }
 
-fn sort<T: Copy, F>(a: &mut[T], test: F) -> ()
-    where F: Fn(T,T) -> bool {
+fn swap(a: &mut[i32], i: usize, j: usize) -> () {
+  let tmp = a[i];
+  a[i] = a[j];
+  a[j] = tmp;
+}
+
+fn sort<F>(a: &mut[i32], test: F) -> ()
+    where F: Fn(i32,i32) -> bool {
   for i in 0..a.len() {
     for j in i..a.len() {
+      //if a[i] > a[j] {
       if test(a[i], a[j]) {
-        a.swap(i,j);
+        swap(&mut a[..], i, j);
       }
     }
   }
